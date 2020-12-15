@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Basic input type</title>
+    <link rel="stylesheet" href="../CSS/simple_form.css">
+</head>
+
+<body class="body">
+    <form>
+        <header class="headerContainer">HTML 5 Form Input Fields</header>
+        <div>
+            <label for="text">Name: </label>
+            <input type="text" id="text" name="text">
+            <error-output class="text-error" for="text"></error-output>
+        </div>
+        <div>
+            <label for="pwd">Password: </label>
+            <input type="password" id="pwd" name="pwd">
+            <error-output class="pwd-error" for="pwd"></error-output>
+        </div>
+        <div>
+            <label for="email">E-mail Id: </label>
+            <input type="email" id="email" name="email">
+            <error-output class="email-error" for="email"></error-output>
+        </div>
+        <div>
+            <label for="url">URL: </label>
+            <input type="url" id="url" name="url">
+        </div>
+        <div class="tab">
+            <label for="number">Number: </label>
+            <input type="number" id="number" name="number">
+            <error-output class="number-error" for="number"></error-output>
+        </div>
+        <div>
+            <label for="tel">Telephone Number: </label>
+            <input type="tel" id="tel" name="tel">
+        </div>
+        <div>
+            <label for="search">Search: </label>
+            <input type="search" id="search" name="search">
+        </div>
+        <div class="nativeDateTimePicker">
+            <label for="dateAndTime">Date and Time: </label>
+            <input type="datetime-local" id="party" name="bday">
+            <span class="Validity"></span>
+        </div>
+        <div>
+            <label for="salary">Salary: </label>
+            <input type="range" id="salary" name="salary" min="30000" max="50000" step="100" value="40000">
+            <output class="salary-output" for="salary">40000</output>
+        </div>
+    </form>
+    <script>
+        const text = document.querySelector('#text');
+        const textError = document.querySelector('.text-error');
+        text.addEventListener('input', function () {
+            let nameRegex = RegExp('^[A-Z]{1}[a-z]{2,}$');
+            if (nameRegex.test(text.value))
+                textError.textContent = "";
+            else textError.textContent = "Name is Incorrect";
+        });
+
+        const email = document.querySelector('#email');
+        const emailError = document.querySelector('.email-error');
+        email.addEventListener('input', function () {
+            let emailRegex = RegExp("^([a-z0-9A-Z])+([.]?[a-z0-9A-Z]+)*[@]{1}[a-z0-9A-Z]+[.]{1}[a-zA-Z]{2,}([.]{1}[a-z]{2,})?$");
+            if (emailRegex.test(email.value))
+                emailError.textContent = "";
+            else emailError.textContent = "Email is Incorrect";
+        });
+
+        const number = document.querySelector('#number');
+        const numberError = document.querySelector('.number-error');
+        number.addEventListener('input', function () {
+            let numberRegex = RegExp("^[1-9]{2}[]{1}[0-9]{10}$");
+            if (numberRegex.test(number))
+                numberError.textContent = "";
+            else numberError.textContent = "Number is Incorrect";
+        });
+
+        const pwd = document.querySelector('#pwd');
+        const pwdError = document.querySelector('.pwd-error');
+        pwd.addEventListener('input', function () {
+            if (pwd.value.match(/[a-z]/g) && pwd.value.match(
+                /[A-Z]/g) && pwd.value.match(
+                    /[0-9]/g) && pwd.value.match(
+                        /[^a-zA-Z\d]/g) && pwd.value.length >= 8) {
+                pwdError.textContent = "";
+            }
+            else pwdError.textContent = "Password is Incorrect";
+        });
+
+        const salary = document.querySelector('#salary');
+        const output = document.querySelector('.salary-output');
+        output.textContent = salary.value;
+        salary.addEventListener('input', function () {
+            output.textContent = salary.value;
+        });
+
+    </script>
+</body>
+
+</html>
